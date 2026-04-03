@@ -49,49 +49,52 @@ section{position:relative;z-index:2;width:100%;}
 .chapters-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:860px;margin:0 auto;}
 @media(max-width:640px){.chapters-grid{grid-template-columns:repeat(2,1fr);gap:12px;}}
 @media(max-width:380px){.chapters-grid{grid-template-columns:1fr;}}
-/* FLIP CARD */
-.ch-card{border:1.5px solid rgba(0,255,65,.12);border-radius:6px;cursor:pointer;position:relative;perspective:900px;min-height:220px;user-select:none;transition:border-color .3s,box-shadow .3s;}
-.ch-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cc),transparent);opacity:.6;border-radius:6px 6px 0 0;z-index:3;pointer-events:none;}
-.ch-card.ch-avail{border-color:var(--cc);box-shadow:0 0 22px color-mix(in srgb,var(--cc) 40%,transparent),0 4px 20px rgba(0,0,0,.5);animation:card-pulse 2.2s ease-in-out infinite;}
-.ch-card.ch-won{border-color:var(--gold);box-shadow:0 0 28px rgba(255,215,0,.35),0 4px 20px rgba(0,0,0,.5);}
-.ch-card.ch-locked{opacity:.62;cursor:default;}
-.ch-card-inner{position:relative;width:100%;height:100%;min-height:220px;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.4,0,.2,1);}
-.ch-card:not(.ch-locked):hover .ch-card-inner{transform:rotateY(180deg);}
-.ch-front,.ch-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 12px 16px;overflow:hidden;}
-.ch-front{background:linear-gradient(145deg,rgba(0,8,2,.97),rgba(0,4,1,.97));}
-.ch-front::before{content:'';position:absolute;inset:0;border-radius:6px;opacity:.12;background:radial-gradient(ellipse at 50% 0%,var(--cc),transparent 70%);pointer-events:none;}
-.ch-back{transform:rotateY(180deg);background:linear-gradient(145deg,rgba(0,6,2,.99),rgba(0,12,4,.99));padding:12px 10px;justify-content:flex-start;border:1px solid rgba(0,255,65,.18);}
-/* Java code back */
-.ch-back-header{font-family:'Share Tech Mono',monospace;font-size:.55rem;color:rgba(0,255,65,.35);letter-spacing:.12em;margin-bottom:8px;width:100%;border-bottom:1px solid rgba(0,255,65,.1);padding-bottom:5px;}
-.ch-java{font-family:'Share Tech Mono',monospace;font-size:.62rem;line-height:1.75;text-align:left;white-space:pre;width:100%;}
+/* CRITICAL BUG CARDS */
+.ch-card{border:1.5px solid rgba(255,60,0,.25);border-radius:6px;cursor:pointer;position:relative;user-select:none;background:linear-gradient(160deg,rgba(8,2,0,.98),rgba(14,4,0,.98));overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s;}
+.ch-card.ch-avail{border-color:#ff3300;box-shadow:0 0 18px rgba(255,51,0,.35),0 0 40px rgba(255,51,0,.12);animation:bug-pulse 1.6s ease-in-out infinite;}
+.ch-card.ch-won{border-color:var(--neon);box-shadow:0 0 18px rgba(0,255,65,.25);}
+.ch-card.ch-locked{opacity:.5;cursor:default;filter:grayscale(.6);}
+@keyframes bug-pulse{0%,100%{box-shadow:0 0 14px rgba(255,51,0,.3),0 0 30px rgba(255,51,0,.08)}50%{box-shadow:0 0 28px rgba(255,51,0,.6),0 0 60px rgba(255,51,0,.2)}}
+/* Bug alert header bar */
+.bug-bar{display:flex;align-items:center;gap:8px;padding:7px 10px;font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.1em;border-bottom:1px solid rgba(255,60,0,.2);}
+.bug-bar.critical{background:rgba(255,40,0,.14);color:#ff5533;}
+.bug-bar.resolved{background:rgba(0,255,65,.08);color:var(--neon);border-color:rgba(0,255,65,.2);}
+.bug-bar.pending{background:rgba(80,80,80,.12);color:rgba(255,255,255,.3);border-color:rgba(255,255,255,.06);}
+.bug-bar-icon{font-size:.85rem;animation:blink-warn .8s step-start infinite;}
+.bug-bar.resolved .bug-bar-icon,.bug-bar.pending .bug-bar-icon{animation:none;}
+@keyframes blink-warn{0%,100%{opacity:1}50%{opacity:.2}}
+.bug-bar-id{margin-left:auto;opacity:.6;font-size:.55rem;}
+/* Java code area */
+.ch-java-wrap{padding:10px 10px 8px;flex:1;overflow:hidden;}
+.ch-java{font-family:'Share Tech Mono',monospace;font-size:.6rem;line-height:1.7;text-align:left;white-space:pre;width:100%;display:block;}
 .jkw{color:#ff9800;}.jcl{color:#00d4ff;}.jan{color:#ff6acc;}.jcm{color:rgba(0,255,65,.4);}.jst{color:#ffd700;}.jop{color:rgba(255,255,255,.5);}
-/* Crawling bug on card back */
-.ch-back-bug{position:absolute;bottom:8px;right:8px;font-size:.9rem;animation:bug-scurry 3s ease-in-out infinite;}
-@keyframes bug-scurry{0%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(-8px,-4px) rotate(-20deg)}50%{transform:translate(-14px,2px) rotate(10deg)}75%{transform:translate(-6px,-6px) rotate(-10deg)}100%{transform:translate(0,0) rotate(0deg)}}
-@keyframes card-pulse{0%,100%{box-shadow:0 0 18px color-mix(in srgb,var(--cc) 35%,transparent)}50%{box-shadow:0 0 36px color-mix(in srgb,var(--cc) 60%,transparent),0 0 60px color-mix(in srgb,var(--cc) 20%,transparent)}}
-.ch-ico{font-size:2.6rem;display:block;margin:0 auto 10px;line-height:1;}
-.ch-crown{position:absolute;top:8px;right:10px;font-size:1.1rem;z-index:2;}
-.ch-name{font-family:'Share Tech Mono',monospace;font-size:.82rem;font-weight:400;letter-spacing:.15em;color:#fff;margin-bottom:4px;}
-.ch-card.ch-won .ch-name{color:var(--gold);}
-.ch-game{font-size:.58rem;letter-spacing:.1em;color:rgba(0,255,65,.28);font-family:'Share Tech Mono',monospace;margin-bottom:12px;}
-.ch-game::before{content:'// ';opacity:.6;}
-.ch-badge{display:inline-block;padding:5px 14px;border-radius:3px;font-family:'Share Tech Mono',monospace;font-size:.56rem;font-weight:400;letter-spacing:.12em;}
-.ch-card.ch-locked .ch-badge{background:rgba(255,255,255,.07);color:rgba(255,255,255,.3);}
-.ch-card.ch-avail .ch-badge{background:color-mix(in srgb,var(--cc) 20%,transparent);border:1px solid var(--cc);color:var(--cc);animation:badge-flicker 1.8s ease-in-out infinite;}
-.ch-card.ch-won .ch-badge{background:rgba(255,215,0,.15);border:1px solid var(--gold);color:var(--gold);}
-@keyframes badge-flicker{0%,100%{opacity:1}50%{opacity:.65}}
+/* Fix bug button */
+.bug-fix-btn{display:block;width:calc(100% - 20px);margin:0 10px 10px;padding:9px 10px;background:rgba(255,40,0,.15);border:1px solid #ff3300;border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.12em;color:#ff5533;cursor:pointer;transition:all .2s;text-align:center;animation:badge-flicker 1.4s ease-in-out infinite;}
+.bug-fix-btn:hover{background:rgba(255,40,0,.3);box-shadow:0 0 20px rgba(255,51,0,.4);color:#fff;}
+.bug-fix-btn.resolved{background:rgba(0,255,65,.1);border-color:var(--neon);color:var(--neon);animation:none;}
+.bug-fix-btn.resolved:hover{background:rgba(0,255,65,.2);}
+.bug-pending-msg{text-align:center;font-family:'Share Tech Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.2);padding:8px 10px 10px;letter-spacing:.1em;}
+@keyframes badge-flicker{0%,100%{opacity:1}50%{opacity:.6}}
 .ch-flash{animation:ch-flash-anim .35s ease-out 3;}
 @keyframes ch-flash-anim{0%,100%{box-shadow:0 0 22px rgba(255,60,60,.5)}50%{box-shadow:0 0 55px rgba(255,60,60,.9),inset 0 0 22px rgba(255,60,60,.15)}}
-/* WISH MODAL BUGS */
-#wm-bugs{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:12px;}
-.wm-bug{position:absolute;font-size:1rem;animation:wm-bug-walk linear infinite;}
-@keyframes wm-bug-walk{0%{transform:translate(0,0) rotate(0deg)}100%{transform:translate(var(--tx),var(--ty)) rotate(var(--tr));}}
 /* GIFT CONFETTI */
 .gift-drop{position:absolute;top:-30px;font-size:1.4rem;animation:gift-fall linear forwards;pointer-events:none;}
 @keyframes gift-fall{to{transform:translateY(110vh) rotate(var(--gr)) scale(.7);opacity:0;}}
 /* FIREWORK */
 .fw-spark{position:absolute;width:4px;height:4px;border-radius:50%;pointer-events:none;animation:fw-fly linear forwards;}
 @keyframes fw-fly{0%{transform:translate(0,0);opacity:1;}100%{transform:translate(var(--fx),var(--fy));opacity:0;}}
+/* WIN POPUP MODAL */
+#win-modal{display:none;position:fixed;inset:0;z-index:9100;background:rgba(0,0,0,.96);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:20px;}
+#win-modal.show{display:flex;}
+.win-box{max-width:500px;width:100%;background:linear-gradient(160deg,rgba(0,12,4,.99),rgba(0,20,6,.99));border:1px solid var(--neon);border-radius:12px;padding:0 0 28px;position:relative;animation:popIn .45s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 0 60px rgba(0,255,65,.25),0 0 120px rgba(0,255,65,.08);}
+.win-mac-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(0,255,65,.05);border-bottom:1px solid rgba(0,255,65,.18);border-radius:12px 12px 0 0;margin-bottom:24px;}
+.win-inner{padding:0 28px;text-align:center;}
+.win-trophy{font-size:3.5rem;display:block;animation:bob 1s ease-in-out infinite;margin-bottom:12px;}
+.win-title{font-family:'Share Tech Mono',monospace;font-size:1.1rem;letter-spacing:.18em;color:var(--neon);text-shadow:0 0 18px var(--neon);margin-bottom:6px;}
+.win-sub{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:rgba(0,255,65,.5);letter-spacing:.1em;margin-bottom:18px;}
+.win-connect{font-family:'Rajdhani',sans-serif;font-size:.98rem;line-height:1.8;color:rgba(255,255,255,.82);background:rgba(0,255,65,.04);border:1px solid rgba(0,255,65,.12);border-radius:8px;padding:14px 18px;margin-bottom:22px;text-align:left;}
+.win-btn{display:inline-block;padding:13px 32px;background:linear-gradient(90deg,rgba(0,255,65,.18),rgba(0,200,50,.12));border:1px solid var(--neon);border-radius:8px;font-family:'Share Tech Mono',monospace;font-size:.82rem;letter-spacing:.15em;color:var(--neon);cursor:pointer;transition:all .2s;text-shadow:0 0 8px var(--neon);}
+.win-btn:hover{background:linear-gradient(90deg,rgba(0,255,65,.3),rgba(0,200,50,.22));box-shadow:0 0 24px rgba(0,255,65,.3);}
 .hero-hint{text-align:center;color:rgba(0,255,65,.28);font-family:'Share Tech Mono',monospace;font-size:.66rem;letter-spacing:.12em;margin-top:22px;}
 .hero-hint::before{content:'$ ';color:rgba(0,255,65,.5);}
 /* GAME MODAL */
@@ -206,7 +209,7 @@ section{position:relative;z-index:2;width:100%;}
       <div class="sp-chapter" id="sp-chapter"></div>
       <div class="sp-title" id="sp-title"></div>
       <div class="sp-story" id="sp-story"></div>
-      <button class="sp-start-btn" onclick="beginChallenge()">▶ BEGIN THE CHALLENGE</button>
+      <button class="sp-start-btn" onclick="beginChallenge()">⚠ DEPLOY FIX — START GAME</button>
     </div>
 
     <!-- GAME AREA (step 2) -->
@@ -229,6 +232,25 @@ section{position:relative;z-index:2;width:100%;}
     </div>
 
     </div><!-- /gm-inner -->
+  </div>
+</div>
+
+<!-- WIN POPUP MODAL -->
+<div id="win-modal">
+  <div class="win-box">
+    <div class="win-mac-bar">
+      <span class="mac-dot red" onclick="closeWinModal()" title="Close"></span>
+      <span class="mac-dot yellow"></span>
+      <span class="mac-dot green"></span>
+      <span class="mac-title" id="win-mac-title">// BUG RESOLVED — WISH UNLOCKED</span>
+    </div>
+    <div class="win-inner">
+      <span class="win-trophy" id="win-trophy">🏆</span>
+      <div class="win-title" id="win-title">BUG RESOLVED</div>
+      <div class="win-sub" id="win-sub"></div>
+      <div class="win-connect" id="win-connect"></div>
+      <button class="win-btn" id="win-wish-btn" onclick="openWishFromWin()">✨ READ BIRTHDAY WISH</button>
+    </div>
   </div>
 </div>
 
@@ -263,13 +285,13 @@ section{position:relative;z-index:2;width:100%;}
     <div class="code-prompt">&gt; npm run celebrate --user="Joandi" --candles=6<span class="cursor"></span></div>
   </div>
   <div class="story-intro">
-    <p>// Six teammates. Six chapters. One birthday build.</p>
-    <p style="margin-top:8px;">Read the story, beat the challenge, unlock the wish. <span class="si-accent">Complete them in order — no skipping.</span></p>
+    <p>// 6 critical bugs detected in production. Fix them in order.</p>
+    <p style="margin-top:8px;">Read the incident report, beat the challenge, unlock the wish. <span class="si-accent">Bugs must be fixed in sequence — no skipping.</span></p>
   </div>
   <div class="chapters-section">
     <div class="chapters-header">
-      <h2>⚙️ SIX MODULES · SIX WISHES ⚙️</h2>
-      <p>// COMPLETE EACH MODULE TO UNLOCK THE NEXT ONE</p>
+      <h2>⚠ INCIDENT BOARD · 6 BUGS · 6 WISHES ⚠</h2>
+      <p>// FIX EACH BUG IN SEQUENCE TO UNLOCK THE NEXT INCIDENT</p>
     </div>
     <div class="chapters-grid" id="chapters-grid"></div>
   </div>
@@ -297,80 +319,64 @@ const MBR={
 
 const CHAPTERS={
   mario:{
-    chapter:'CHAPTER I',
-    storyTitle:'The Monday Morning Debate',
-    story:`<p>It's April 6th. Your birthday. Mario sends a birthday message at 7 AM sharp.</p>
-<p>It contains one sentence: <em>"Happy Birthday — but first, score a goal."</em></p>
-<p>No context. No greeting. Just a challenge.</p>
-<p>He is on a video call thirty seconds later. In full Real Madrid kit. Holding a football. He has clearly planned this.</p>
-<p>"One penalty," he says. "You're a Real Madrid fan. Prove it."</p>
-<p>You are still in bed. He is wearing shin guards.</p>
-<p>"Mario it's literally my birthday—"</p>
-<p>"The keeper is ready," he says. He does not explain who the keeper is.</p>`,
-    connect:'GOOOAL! Mario jumps off his chair. You hear something crash behind him. "That\'s what I\'m talking about! Happy Birthday!" He catches his breath. "Ivet is next — she has something prepared for you too."'
+    chapter:'BUG-001',
+    storyTitle:'NullPointerException at GoalRouter.java',
+    story:`<p><strong style="color:#ff4422">CRITICAL:</strong> Mario's architecture module has crashed. The <code>GoalRouter</code> is throwing a <code>NullPointerException</code> — every traffic request is spiraling into a void with no route to production.</p>
+<p>As Solution Architect, Mario isolated the root cause in 4 minutes. His diagnosis: the load balancer needs exactly one clean redirect — a perfectly aimed penalty kick — to flush the null pointer and restore the routing table.</p>
+<p>He opened an incident channel at 7 AM. He was already wearing shin guards when he joined the call. <em>Nobody asked why.</em></p>
+<p>The fix window is closing. Score the goal. Patch the architecture. Ship it.</p>`,
+    connect:'GOOOAL! GoalRouter.java redeployed successfully. Mario closes the incident with one comment: "Fixed." He does not elaborate. Ivet has already opened the next incident — she filed it at exactly the same second Mario resolved this one.'
   },
   ivet:{
-    chapter:'CHAPTER II',
-    storyTitle:'The Photographer\'s Challenge',
-    story:`<p>Ivet sends a birthday message. It comes with an attachment and a single line: <em>"I know you enjoy taking photos. Let's see how good the eye really is."</em></p>
-<p>Three moving targets. Twenty seconds. The targets are moving at a speed that raises questions about Ivet's definition of "fair".</p>
-<p>You reply: "These are going very fast—"</p>
-<p>She writes back: "A good photographer doesn't wait for the subject to slow down."</p>
-<p>A seagull drifts past with total indifference to your stress levels.</p>
-<p>A plane follows immediately. Then a sunset — moving, somehow, sideways.</p>
-<p>You pick up the virtual camera.</p>`,
-    connect:'"Three for three. Okay — that was actually good," Ivet says. From Ivet, this is a standing ovation. "Hris sent you a calendar invite this morning. Subject line: Birthday Performance Evaluation. I\'m not joking. Good luck."'
+    chapter:'BUG-002',
+    storyTitle:'OutOfFocusException at ProjectTimeline.java',
+    story:`<p><strong style="color:#ff4422">CRITICAL:</strong> The project timeline is corrupted. Every milestone photo in the <code>ProjectTimeline</code> module is returning <code>OutOfFocusException</code> — requirements are blurred, deadlines are invisible, and the sprint board shows nothing.</p>
+<p>Ivet opened the incident before anyone else noticed. As Project Manager, she identified the fix: the timeline needs exactly 3 clear snapshots to restore the milestone index. Miss one and the whole sprint collapses.</p>
+<p>She sent the incident brief at 6:58 AM. The brief included a deadline. The deadline was 7:00 AM.</p>
+<p><em>"A good PM doesn't wait for the subject to slow down,"</em> she wrote in the notes field. The targets are already moving. Snap the photos. Recover the timeline.</p>`,
+    connect:'Three snapshots captured. ProjectTimeline.java restored. Ivet closes the incident and immediately assigns the next one to Hris — she had already written it before this one was resolved. Efficiency is not a trait, it is a personality.'
   },
   hris:{
-    chapter:'CHAPTER III',
-    storyTitle:'The Birthday Performance Evaluation',
-    story:`<p>You receive a calendar invite from Hris. Subject line: <strong>BIRTHDAY PERFORMANCE EVALUATION — MANDATORY.</strong></p>
-<p>Description: "9 seconds. Fill the nitro bar. There is no alternative option."</p>
-<p>You call him. He answers on the first ring, wearing aviators. On a video call. Inside. During the day.</p>
-<p>"I know you're into cars," he says, very calmly. "Not just any cars — quality ones. Fast ones." He adjusts his aviators. "So today I find out if the knowledge goes all the way down to the reflexes."</p>
-<p>You hear an engine running somewhere in his background. It is unclear if it is real. It sounds very real.</p>
-<p>"Boost button is ready," he says, checking his watch. "You're already behind pace, Joandi. I've been timing you since you woke up."</p>
-<p>He hangs up. The engine sound continues for another three seconds.</p>`,
-    connect:'The nitro bar maxes out! Hris gives you a single slow nod — from Hris, that is a ticker-tape parade. "Reflexes match the theory," he says. "Geri\'s next. She sent me a postcard with a coastline and said it\'s your chapter. I don\'t know more than that."'
+    chapter:'BUG-003',
+    storyTitle:'StackOverflowException at Requirements.analyze()',
+    story:`<p><strong style="color:#ff4422">CRITICAL:</strong> The business analysis engine has entered an infinite loop. <code>Requirements.analyze()</code> is calling itself recursively at maximum speed — the stack is overflowing, the system is freezing, and nobody can read the requirements.</p>
+<p>Hris detected the anomaly during his morning review. As Business Analyst, he determined the escape condition: someone must outrun the loop — hit the nitro bar at full speed and intercept the recursive call before it overflows the heap.</p>
+<p>He joined the call wearing aviators. Indoor. Daytime. There was an engine sound in his background. It was real.</p>
+<p><em>"You're already behind pace,"</em> he said, checking his watch. <em>"The stack has 9 seconds before it overflows."</em></p>
+<p>Push the nitro. Break the loop. Restore the requirements.</p>`,
+    connect:'Stack cleared. Requirements.analyze() exits cleanly. Hris gives one slow nod — the incident is closed with a single word in the comments: "Resolved." Geri has already opened the next incident. It involves the database. It is not good.'
   },
   geri:{
-    chapter:'CHAPTER IV',
-    storyTitle:'The Coastal Postcard',
-    story:`<p>Geri sends you a digital postcard. It has the full postcard energy: a perfect blue coastline, sunlight hitting the waves, the kind of photo that makes you want to book a flight immediately.</p>
-<p>On the back: <em>"I know you love the sea. But can you catch what the sea sends you?"</em></p>
-<p>You open the attachment. Sea treasures are drifting past in the current — shells, starfish, colourful fish, a crab moving sideways with absolute confidence.</p>
-<p>You message Geri: "Is this a fishing game for my birthday?"</p>
-<p>She replies after exactly 35 seconds: "It's a coastal appreciation exercise."</p>
-<p>Then: "Eighteen seconds. Six catches."</p>
-<p>Then her status goes to Away. She gave the assignment and left. The crab is already sideways. The current is moving.</p>`,
-    connect:'"Six catches — you clearly know the sea well," Geri writes when she returns online. "Kaloyan has something for you next. He sent me a preview of the challenge PDF." A pause. "It has a table of contents. I\'m sorry."'
+    chapter:'BUG-004',
+    storyTitle:'DataCorruptionException at production.db',
+    story:`<p><strong style="color:#ff4422">CRITICAL:</strong> The production database has drowned. A <code>DataCorruptionException</code> cascaded through every table — records are scattered across a digital ocean, drifting in corrupted fragments that look suspiciously like fish.</p>
+<p>Geri opened the P1 incident before the monitoring alert even fired. As DB Engineer, she mapped the recovery path: 6 data records must be retrieved from the corrupted pool within 18 seconds or the next backup window will seal them forever.</p>
+<p>She sent the incident report as a postcard. A <em>digital</em> postcard. With a coastline. She described it as "setting the right tone for a recovery operation."</p>
+<p>The fragments are drifting. The current is moving. A corrupted crab is going sideways with absolute confidence.</p>
+<p>Dive in. Collect the data. Restore the database.</p>`,
+    connect:'6 records recovered. production.db restored from fragments. Geri closes the incident and goes offline for exactly 35 seconds — then reappears and silently assigns the next ticket to Kaloyan. It has CRITICAL priority. It always does.'
   },
   kaloyan:{
-    chapter:'CHAPTER V',
-    storyTitle:'The Precision Brief',
-    story:`<p>Kaloyan sends you a PDF at exactly 9:00 AM.</p>
-<p>Subject: <strong>BIRTHDAY CHALLENGE — EYES ONLY.</strong></p>
-<p>The document is five pages. It contains diagrams. Annotated. With a legend. The legend has a legend.</p>
-<p>You call him immediately.</p>
-<p>"Kaloyan. Did you make a technical document for a birthday game?"</p>
-<p>"PDF," he corrects, very calmly. "You notice things most people miss — the right car spec, the best dish on the menu, the exact right souvenir. That's a precision eye." A pause. "Two out of three hits. Prove the eye is real."</p>
-<p>The target begins moving. Figure-8. Accelerating.</p>
-<p>You check the PDF. Page 4 says only: <em>"Trust the crosshair."</em></p>
-<p>His desk is perfectly clean behind him. Of course it is. He has already set his status to Busy.</p>`,
-    connect:'Two hits. Kaloyan sends one message: "Precision confirmed." No punctuation. No emoji. Just that. Martin is last — and he\'s been texting since 7 AM that the gift is ready. Brace yourself.'
+    chapter:'BUG-005',
+    storyTitle:'UnauthorizedAccessException at ServerSecurity.java',
+    story:`<p><strong style="color:#ff4422">CRITICAL:</strong> The backend has been breached. Hostile threads are running unauthorized processes inside <code>ServerSecurity.java</code> — enemy code is consuming memory, corrupting endpoints, and the server is minutes from going down.</p>
+<p>Kaloyan opened the incident at exactly 9:00 AM. He sent a 5-page technical PDF with the attack map, annotated diagrams, and a threat assessment. <em>The legend had its own legend.</em></p>
+<p>As Backend Developer, he determined the elimination strategy: 2 out of 3 confirmed hits on unauthorized processes to terminate the breach. The threats are moving. Figure-8. Accelerating.</p>
+<p>Page 4 of the PDF contains one line: <em>"Trust the crosshair."</em></p>
+<p>His desk is perfectly clean behind him. His status is already set to Busy.</p>
+<p>Lock on. Fire. Defend the backend.</p>`,
+    connect:'2 hits confirmed. UnauthorizedAccessException neutralized. Kaloyan closes the incident with zero comments. Martin has been filing test failures since 7 AM. The QA report is 3 pages long. Brace yourself.'
   },
   martin:{
-    chapter:'CHAPTER VI',
-    storyTitle:'The Big Blow',
-    story:`<p>Martin calls at exactly midnight the night before your birthday.</p>
-<p>"I have a surprise," he says. "A very special birthday performance."</p>
-<p>You arrive to find a table with the most magnificent birthday cake you've ever seen — six candles blazing, casting golden light across the room.</p>
-<p>Around the table: Bugs Bunny in a party hat, Tweety in a bow tie, Daffy Duck with confetti in his feathers, and Porky Pig wearing the world's most formal waistcoat.</p>
-<p>"W-w-we rehearsed," Porky confirms, very seriously.</p>
-<p>"One breath per candle," Martin says. "Obviously. Obviously that's the rule. Bugs wrote it down."</p>
-<p>Bugs holds up a napkin. It says: <strong>BLOW THE CANDLES. ALL SIX. WE BELIEVE IN YOU.</strong></p>
-<p>The candles flicker. The whole room is watching.</p>`,
-    connect:'All six candles go dark! The room ERUPTS. Bugs punches the air. Tweety does a victory spin. Daffy says something incomprehensible but clearly emotional. Porky is crying and refusing to admit it. Martin cheers the loudest of all. Happy birthday, Joandi. 🎉'
+    chapter:'BUG-006',
+    storyTitle:'InfiniteLoopException at BirthdayModule.java',
+    story:`<p><strong style="color:#ff4422">CRITICAL:</strong> The birthday module has broken. <code>candles.spawn()</code> is stuck in an infinite loop — candles keep multiplying, the celebration heap is overflowing, and the entire birthday release is blocked.</p>
+<p>Martin filed the QA report at midnight. All 6 candle test cases are failing. He included screenshots, regression notes, and a reproduction guide. He then called to make sure the report was received.</p>
+<p>As QA Engineer, he identified the acceptance criteria: blow out all 6 candles in sequence to pass the test suite and unblock the birthday deployment to production.</p>
+<p>Around the test environment: Bugs Bunny in a party hat holding a test plan, Tweety with a bug report, Daffy Duck with a severity matrix, and Porky Pig who says <em>"W-w-we rehearsed the test cases."</em></p>
+<p>The candles are still multiplying. The deployment is waiting.</p>
+<p>Pass the tests. Ship the birthday.</p>`,
+    connect:'All 6 candle tests PASSED. BirthdayModule.java deployed to production. Martin marks every test case green and closes the sprint. The whole team cheers. All 6 bugs fixed. All 6 wishes earned. Happy Birthday, Joandi.'
   }
 };
 
@@ -674,15 +680,15 @@ function startGame(name){
   // If locked, flash warning
   if(!isAvailable(name)){
     const idx=GAME_ORDER.indexOf(name);
-    const prevName=GAME_ORDER[idx-1];
-    flashLocked(name,`Complete Chapter ${toRoman(idx)} first!`);
+    flashLocked(name,`Fix BUG-${String(idx).padStart(3,'0')} first!`);
     return;
   }
   curMember=name;
   if(gameCleanupFn){gameCleanupFn();gameCleanupFn=null;}
   // Show story panel
   const ch=CHAPTERS[name];
-  document.getElementById('sp-chapter').textContent=ch.chapter+' · '+GAMES[name].title;
+  const bugIdx=GAME_ORDER.indexOf(name)+1;
+  document.getElementById('sp-chapter').textContent='BUG-'+String(bugIdx).padStart(3,'0')+' · '+GAMES[name].title;
   document.getElementById('sp-title').textContent=ch.storyTitle;
   document.getElementById('sp-story').innerHTML=ch.story;
   document.getElementById('gm-story-panel').style.display='block';
@@ -722,13 +728,23 @@ function retryGame(){
 function winGame(){
   if(gameCleanupFn){gameCleanupFn();gameCleanupFn=null;}
   markWon(curMember);
-  const r=document.getElementById('gm-result');r.style.display='block';
-  document.getElementById('r-ico').textContent='🏆';
-  const t=document.getElementById('r-title');t.textContent='CHAPTER COMPLETE!';t.className='res-title res-win';
-  document.getElementById('r-sub').textContent='You earned '+MBR[curMember].from.replace('FROM ','')+`'s birthday wish!`;
-  const rs=document.getElementById('r-story');rs.textContent=CHAPTERS[curMember].connect;rs.style.display='block';
-  document.getElementById('r-wish').style.display='inline-block';
+  closeGame();
+  showWinModal(curMember);
 }
+function showWinModal(name){
+  const ch=CHAPTERS[name];
+  const who=MBR[name].from.replace('FROM ','');
+  document.getElementById('win-mac-title').textContent='// '+ch.chapter+' — BUG RESOLVED ✓';
+  document.getElementById('win-trophy').textContent='🏆';
+  document.getElementById('win-title').textContent='BUG RESOLVED — WISH UNLOCKED';
+  document.getElementById('win-sub').textContent=ch.chapter+' · '+who.toUpperCase()+' · STATUS: FIXED';
+  document.getElementById('win-connect').textContent=ch.connect;
+  document.getElementById('win-modal').classList.add('show');
+  burst(22);giftBurst(12);fireworks(5);
+}
+function closeWinModal(){document.getElementById('win-modal').classList.remove('show');}
+function openWishFromWin(){closeWinModal();showWishModal(curMember);}
+document.getElementById('win-modal').addEventListener('click',e=>{if(e.target===document.getElementById('win-modal'))closeWinModal();});
 function loseGame(msg){
   const r=document.getElementById('gm-result');r.style.display='block';
   document.getElementById('r-ico').textContent='😅';
@@ -992,8 +1008,6 @@ function showWishModal(name){
   document.getElementById('wm-msg').textContent=d.msg;
   document.getElementById('wm-sign').textContent=d.sign;
   document.getElementById('wm').classList.add('show');
-  fireworks(5);giftBurst(14);
-  setTimeout(startWmBugs,80);
 }
 function closeWish(){document.getElementById('wm').classList.remove('show');stopWmBugs();}
 document.getElementById('wm').addEventListener('click',e=>{if(e.target===document.getElementById('wm'))closeWish();});
@@ -1849,21 +1863,26 @@ function renderChapters(){
     const won=wonSet.has(key),avail=isAvailable(key)&&!won,locked=!won&&!avail;
     const card=document.createElement('div');
     card.className='ch-card '+(won?'ch-won':avail?'ch-avail':'ch-locked');
-    card.style.setProperty('--cc',n.color);
     card.id='ch-card-'+key;
-    // Front face
-    const front=`<div class="ch-front">`+
-      (won?'<div class="ch-crown">👑</div>':'')+
-      `<div class="ch-ico">${locked?'🔒':n.ico}</div>`+
-      `<div class="ch-name">${n.label}</div>`+
-      `<div class="ch-game">${n.game}</div>`+
-      `<div class="ch-badge">${won?'✓ WISH UNLOCKED':avail?'▶ PLAY NOW':'LOCKED'}</div>`+
-      `</div>`;
-    // Back face - Java code
-    const back=locked?
-      `<div class="ch-back"><div class="ch-back-header">// ${n.label}.java — LOCKED 🔒</div><div class="ch-java" style="opacity:.35;color:rgba(0,255,65,.4)">// Access denied.\n// Complete previous\n// chapter first.\n\n<span class="jcm">// ERROR: 403</span></div></div>`:
-      `<div class="ch-back"><div class="ch-back-header">// ${n.label}.java</div><div class="ch-java">${JAVA_SNIPPETS[key]||''}</div><span class="ch-back-bug">🐛</span></div>`;
-    card.innerHTML=`<div class="ch-card-inner">${front}${back}</div>`;
+    // Bug alert header bar
+    const barCls=won?'resolved':avail?'critical':'pending';
+    const barIcon=won?'✓':avail?'⚠':'⏳';
+    const barLabel=won?'RESOLVED':'CRITICAL BUG DETECTED';
+    const bugId='BUG-'+String(idx+1).padStart(3,'0');
+    // Java code
+    const javaBlock=locked
+      ?`<span class="jcm">// ${bugId} — Access denied.\n// Complete previous bug\n// fix first.\n\n// STATUS: PENDING</span>`
+      :(JAVA_SNIPPETS[key]||'');
+    // Button / pending msg
+    const bottom=locked
+      ?`<div class="bug-pending-msg">⏳ PENDING CLEARANCE</div>`
+      :won
+        ?`<button class="bug-fix-btn resolved">✓ WISH UNLOCKED — READ</button>`
+        :`<button class="bug-fix-btn">⚠ FIX THE BUG — PLAY NOW</button>`;
+    card.innerHTML=
+      `<div class="bug-bar ${barCls}"><span class="bug-bar-icon">${barIcon}</span><span>${barLabel}</span><span class="bug-bar-id">${bugId} · ${n.label}</span></div>`+
+      `<div class="ch-java-wrap"><span class="ch-java">${javaBlock}</span></div>`+
+      bottom;
     if(!locked)card.onclick=()=>startGame(key);
     grid.appendChild(card);
   });
