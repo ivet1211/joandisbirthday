@@ -4,70 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>JOANDI — 6 APR ⭐</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Dancing+Script:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root{--neon:#00d4ff;--neon2:#7000ff;--gold:#ffd700;--bg:#000810;}
+:root{--neon:#00ff41;--neon2:#7000ff;--gold:#ffd700;--bg:#000802;--matrix:#00ff41;--java:#f89820;}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
 body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden;}
 #canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
-.scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,212,255,.012) 3px,rgba(0,212,255,.012) 4px);}
+.scanlines{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,255,65,.01) 3px,rgba(0,255,65,.01) 4px);}
 #cf{position:fixed;inset:0;z-index:999;pointer-events:none;overflow:hidden;}
 .cf{position:absolute;top:-20px;font-size:18px;animation:cfall linear forwards;}
 @keyframes cfall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
 section{position:relative;z-index:2;width:100%;}
-#hud{position:fixed;top:14px;right:14px;z-index:200;background:rgba(0,10,30,.88);border:1px solid rgba(0,212,255,.3);border-radius:14px;padding:10px 18px;font-family:'Orbitron',sans-serif;font-size:.67rem;color:var(--neon);letter-spacing:.12em;box-shadow:0 0 20px rgba(0,212,255,.15);backdrop-filter:blur(8px);transition:all .4s;}
+#hud{position:fixed;top:14px;right:14px;z-index:200;background:rgba(0,5,2,.92);border:1px solid rgba(0,255,65,.35);border-radius:6px;padding:10px 18px;font-family:'Share Tech Mono',monospace;font-size:.67rem;color:var(--matrix);letter-spacing:.12em;box-shadow:0 0 20px rgba(0,255,65,.15),inset 0 0 10px rgba(0,255,65,.04);backdrop-filter:blur(8px);transition:all .4s;}
+#hud::before{content:'> ';opacity:.5;}
 #hud.complete{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px rgba(255,215,0,.4);}
+#hud.complete::before{content:'✓ ';}
 #hud-n{font-size:1.4rem;font-weight:900;line-height:1;display:block;}
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px 30px;}
 .hero-top{text-align:center;margin-bottom:22px;}
-.rm-badge{display:inline-block;background:linear-gradient(135deg,#fff,#e8dfc8,#fff);color:#0b1e6e;font-family:'Orbitron',sans-serif;font-size:.62rem;font-weight:900;letter-spacing:.18em;padding:5px 20px;border-radius:30px;box-shadow:0 0 24px rgba(255,255,255,.28);margin-bottom:16px;}
+.rm-badge{display:inline-block;background:rgba(0,0,0,.92);color:var(--matrix);font-family:'Share Tech Mono',monospace;font-size:.68rem;font-weight:400;letter-spacing:.12em;padding:6px 22px;border-radius:4px;border:1px solid rgba(0,255,65,.55);box-shadow:0 0 18px rgba(0,255,65,.22),inset 0 0 12px rgba(0,255,65,.04);margin-bottom:16px;}
+.code-prompt{display:block;font-family:'Share Tech Mono',monospace;font-size:.88rem;color:var(--matrix);text-shadow:0 0 8px rgba(0,255,65,.5);margin-top:14px;letter-spacing:.05em;}
+.code-prompt .cursor{display:inline-block;width:9px;height:1.1em;background:var(--matrix);vertical-align:middle;margin-left:2px;animation:blink .7s step-start infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.classified{display:inline-block;border:2px solid #ff4422;color:#ff4422;font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.3em;padding:3px 14px;transform:rotate(-6deg);opacity:.7;margin-left:14px;text-shadow:0 0 8px rgba(255,68,34,.6);box-shadow:0 0 10px rgba(255,68,34,.2);vertical-align:middle;}
 .glitch{font-family:'Orbitron',sans-serif;font-size:clamp(2.2rem,7vw,5.5rem);font-weight:900;letter-spacing:.06em;color:#fff;text-shadow:0 0 30px var(--neon);position:relative;}
 .glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;}
 .glitch::before{animation:g1 3s infinite;color:var(--neon);clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);}
 .glitch::after{animation:g2 3s infinite;color:var(--neon2);clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);}
 @keyframes g1{0%,90%,100%{transform:translate(0)}91%{transform:translate(-4px,2px)}93%{transform:translate(4px,-2px)}95%{transform:translate(-2px,0)}}
 @keyframes g2{0%,88%,100%{transform:translate(0)}89%{transform:translate(4px,2px)}92%{transform:translate(-4px,-2px)}94%{transform:translate(2px,0)}}
-.subtitle{font-family:'Orbitron',sans-serif;font-size:clamp(.78rem,2vw,1.1rem);color:var(--gold);letter-spacing:.3em;margin-top:10px;text-shadow:0 0 14px var(--gold);}
-.date-chip{display:inline-block;margin-top:14px;background:linear-gradient(90deg,#d40511,#ff4422);border-radius:30px;padding:6px 24px;font-family:'Orbitron',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.12em;box-shadow:0 0 20px rgba(212,5,17,.6);}
-.story-intro{text-align:center;max-width:600px;margin:0 auto 22px;padding:16px 24px;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.12);border-radius:16px;}
-.story-intro p{font-size:clamp(.82rem,2vw,1rem);color:rgba(255,255,255,.7);line-height:1.7;}
-.story-intro p:first-child{color:rgba(255,255,255,.9);font-size:clamp(.9rem,2.2vw,1.08rem);}
-.si-accent{color:var(--neon);font-weight:700;}
+.subtitle{font-family:'Share Tech Mono',monospace;font-size:clamp(.78rem,2vw,1.1rem);color:var(--matrix);letter-spacing:.3em;margin-top:10px;text-shadow:0 0 14px rgba(0,255,65,.6);}
+.date-chip{display:inline-block;margin-top:14px;background:rgba(0,0,0,.9);border-radius:4px;border:1px solid rgba(0,255,65,.5);padding:6px 24px;font-family:'Share Tech Mono',monospace;font-size:.75rem;font-weight:400;letter-spacing:.15em;color:var(--matrix);box-shadow:0 0 18px rgba(0,255,65,.25);}
+.story-intro{text-align:left;max-width:600px;margin:0 auto 22px;padding:16px 24px;background:rgba(0,255,65,.025);border:1px solid rgba(0,255,65,.15);border-radius:6px;font-family:'Share Tech Mono',monospace;}
+.story-intro::before{content:'> CLASSIFIED_BRIEF.md';display:block;font-size:.65rem;color:rgba(0,255,65,.45);letter-spacing:.1em;margin-bottom:10px;border-bottom:1px solid rgba(0,255,65,.1);padding-bottom:6px;}
+.story-intro p{font-size:clamp(.8rem,1.9vw,.95rem);color:rgba(200,255,210,.75);line-height:1.75;}
+.story-intro p:first-child{color:rgba(0,255,65,.9);font-size:clamp(.85rem,2.1vw,1rem);}
+.si-accent{color:var(--matrix);font-weight:700;}
 /* CHAPTERS */
 .chapters-section{width:100%;padding:0 16px 30px;position:relative;}
 .chapters-header{text-align:center;margin-bottom:24px;}
-.chapters-header h2{font-family:'Orbitron',sans-serif;font-size:clamp(1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:.22em;color:var(--gold);text-shadow:0 0 22px var(--gold);}
-.chapters-header p{font-family:'Orbitron',sans-serif;font-size:.62rem;letter-spacing:.18em;color:rgba(255,255,255,.38);margin-top:6px;}
+.chapters-header h2{font-family:'Share Tech Mono',monospace;font-size:clamp(1rem,2.5vw,1.4rem);font-weight:400;letter-spacing:.18em;color:var(--matrix);text-shadow:0 0 22px rgba(0,255,65,.5);}
+.chapters-header p{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.18em;color:rgba(0,255,65,.35);margin-top:6px;}
 .chapters-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:860px;margin:0 auto;}
 @media(max-width:640px){.chapters-grid{grid-template-columns:repeat(2,1fr);gap:12px;}}
 @media(max-width:380px){.chapters-grid{grid-template-columns:1fr;}}
-.ch-card{background:linear-gradient(145deg,rgba(8,16,40,.97),rgba(4,4,22,.97));border:1.5px solid rgba(255,255,255,.1);border-radius:22px;padding:22px 14px 18px;text-align:center;cursor:pointer;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s;user-select:none;}
-.ch-card::before{content:'';position:absolute;inset:0;border-radius:22px;opacity:0;transition:opacity .3s;background:radial-gradient(ellipse at 50% 0%,var(--cc) ,transparent 70%);}
-.ch-card:hover::before{opacity:.18;}
+.ch-card{background:linear-gradient(145deg,rgba(0,8,2,.97),rgba(0,4,1,.97));border:1.5px solid rgba(0,255,65,.12);border-radius:6px;padding:22px 14px 18px;text-align:center;cursor:pointer;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s;user-select:none;}
+.ch-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cc),transparent);opacity:.6;border-radius:6px 6px 0 0;}
+.ch-card::before{content:'';position:absolute;inset:0;border-radius:6px;opacity:0;transition:opacity .3s;background:radial-gradient(ellipse at 50% 0%,var(--cc) ,transparent 70%);}
+.ch-card:hover::before{opacity:.14;}
 .ch-card.ch-avail{border-color:var(--cc);box-shadow:0 0 22px color-mix(in srgb,var(--cc) 40%,transparent),0 4px 20px rgba(0,0,0,.5);animation:card-pulse 2.2s ease-in-out infinite;}
 .ch-card.ch-avail::before{opacity:.12;}
 .ch-card.ch-won{border-color:var(--gold);box-shadow:0 0 28px rgba(255,215,0,.35),0 4px 20px rgba(0,0,0,.5);}
 .ch-card.ch-won::before{opacity:.14;background:radial-gradient(ellipse at 50% 0%,rgba(255,215,0,.6),transparent 70%);}
 .ch-card.ch-locked{opacity:.62;cursor:default;}
 @keyframes card-pulse{0%,100%{box-shadow:0 0 18px color-mix(in srgb,var(--cc) 35%,transparent)}50%{box-shadow:0 0 36px color-mix(in srgb,var(--cc) 60%,transparent),0 0 60px color-mix(in srgb,var(--cc) 20%,transparent)}}
-.ch-num{font-family:'Orbitron',sans-serif;font-size:.58rem;font-weight:900;letter-spacing:.28em;color:rgba(255,255,255,.35);margin-bottom:8px;}
+.ch-num{font-family:'Share Tech Mono',monospace;font-size:.58rem;font-weight:400;letter-spacing:.28em;color:rgba(0,255,65,.3);margin-bottom:8px;}
 .ch-card.ch-avail .ch-num{color:var(--cc);}
 .ch-card.ch-won .ch-num{color:var(--gold);}
 .ch-ico{font-size:2.6rem;display:block;margin:0 auto 10px;line-height:1;position:relative;z-index:1;transition:transform .2s;}
 .ch-card:not(.ch-locked):hover .ch-ico{transform:scale(1.18);}
 .ch-crown{position:absolute;top:8px;right:10px;font-size:1.1rem;}
-.ch-name{font-family:'Orbitron',sans-serif;font-size:.82rem;font-weight:900;letter-spacing:.15em;color:#fff;margin-bottom:4px;position:relative;z-index:1;}
+.ch-name{font-family:'Share Tech Mono',monospace;font-size:.82rem;font-weight:400;letter-spacing:.15em;color:#fff;margin-bottom:4px;position:relative;z-index:1;}
 .ch-card.ch-won .ch-name{color:var(--gold);}
-.ch-game{font-size:.6rem;letter-spacing:.1em;color:rgba(255,255,255,.3);font-family:'Orbitron',sans-serif;margin-bottom:12px;position:relative;z-index:1;}
-.ch-badge{display:inline-block;padding:5px 14px;border-radius:30px;font-family:'Orbitron',sans-serif;font-size:.56rem;font-weight:900;letter-spacing:.15em;position:relative;z-index:1;}
+.ch-game{font-size:.58rem;letter-spacing:.1em;color:rgba(0,255,65,.28);font-family:'Share Tech Mono',monospace;margin-bottom:12px;position:relative;z-index:1;}
+.ch-game::before{content:'// ';opacity:.6;}
+.ch-badge{display:inline-block;padding:5px 14px;border-radius:3px;font-family:'Share Tech Mono',monospace;font-size:.56rem;font-weight:400;letter-spacing:.12em;position:relative;z-index:1;}
 .ch-card.ch-locked .ch-badge{background:rgba(255,255,255,.07);color:rgba(255,255,255,.3);}
 .ch-card.ch-avail .ch-badge{background:color-mix(in srgb,var(--cc) 20%,transparent);border:1px solid var(--cc);color:var(--cc);animation:badge-flicker 1.8s ease-in-out infinite;}
 .ch-card.ch-won .ch-badge{background:rgba(255,215,0,.15);border:1px solid var(--gold);color:var(--gold);}
 @keyframes badge-flicker{0%,100%{opacity:1}50%{opacity:.65}}
 .ch-flash{animation:ch-flash-anim .35s ease-out 3;}
 @keyframes ch-flash-anim{0%,100%{box-shadow:0 0 22px rgba(255,60,60,.5)}50%{box-shadow:0 0 55px rgba(255,60,60,.9),inset 0 0 22px rgba(255,60,60,.15)}}
-.hero-hint{text-align:center;color:rgba(255,255,255,.28);font-size:.66rem;letter-spacing:.12em;margin-top:22px;}
+.hero-hint{text-align:center;color:rgba(0,255,65,.28);font-family:'Share Tech Mono',monospace;font-size:.66rem;letter-spacing:.12em;margin-top:22px;}
+.hero-hint::before{content:'$ ';color:rgba(0,255,65,.5);}
 /* GAME MODAL */
 #gm{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.93);backdrop-filter:blur(14px);align-items:center;justify-content:center;padding:16px;}
 #gm.show{display:flex;}
@@ -143,9 +153,10 @@ section{position:relative;z-index:2;width:100%;}
 .dm-box p{color:rgba(255,255,255,.85);line-height:1.75;font-size:1.05rem;}
 .dm-close{margin-top:24px;padding:12px 32px;background:linear-gradient(90deg,var(--gold),#c9a84c);border:none;border-radius:30px;color:#000;font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:900;cursor:pointer;letter-spacing:.12em;transition:transform .2s;}
 .dm-close:hover{transform:scale(1.06);}
-.footer{padding:40px 20px;text-align:center;border-top:1px solid rgba(0,212,255,.1);position:relative;z-index:2;}
-.footer-ball{font-size:2.8rem;cursor:pointer;display:inline-block;transition:transform .3s;}
-.footer p{color:rgba(255,255,255,.32);font-size:.72rem;letter-spacing:.1em;margin-top:8px;}
+.footer{padding:40px 20px;text-align:center;border-top:1px solid rgba(0,255,65,.12);position:relative;z-index:2;}
+.footer-ball{font-size:2.8rem;cursor:pointer;display:inline-block;transition:transform .3s;filter:drop-shadow(0 0 10px rgba(0,255,65,.4));}
+.footer p{color:rgba(0,255,65,.3);font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:.1em;margin-top:8px;}
+.footer p span{color:rgba(0,255,65,.6);}
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:rgba(0,212,255,.3);border-radius:3px;}
 </style>
 </head>
@@ -206,29 +217,30 @@ section{position:relative;z-index:2;width:100%;}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-top">
-    <div class="rm-badge">⚽ REAL MADRID C.F. ⚽</div>
+    <div class="rm-badge">// PROTOCOL: birthday.sh --user=JOANDI --date=06.04.2026 <span class="classified">CLASSIFIED</span></div>
     <div class="glitch" data-text="HAPPY BIRTHDAY">HAPPY BIRTHDAY</div>
-    <div class="subtitle">— J O A N D I —</div>
-    <div class="date-chip">🎂 APRIL 6, 2026 🎂</div>
+    <div class="subtitle">{ &nbsp;J O A N D I&nbsp; }</div>
+    <div class="date-chip">🐛 APRIL 6, 2026 · git tag v$(date +%Y) 🐛</div>
+    <div class="code-prompt">&gt; npm run celebrate --user="Joandi" --candles=6<span class="cursor"></span></div>
   </div>
   <div class="story-intro">
-    <p>Six teammates. Six missions. One birthday legend.</p>
+    <p>// Six devs. Six chapters. One birthday build.</p>
     <p style="margin-top:8px;">Read the story, beat the challenge, unlock the wish. <span class="si-accent">Complete them in order — no skipping.</span></p>
   </div>
   <div class="chapters-section">
     <div class="chapters-header">
-      <h2>🎂 SIX CHAPTERS · SIX WISHES 🎂</h2>
-      <p>COMPLETE EACH CHAPTER TO UNLOCK THE NEXT ONE</p>
+      <h2>⚙️ SIX MODULES · SIX WISHES ⚙️</h2>
+      <p>// COMPLETE EACH MODULE TO UNLOCK THE NEXT ONE</p>
     </div>
     <div class="chapters-grid" id="chapters-grid"></div>
   </div>
-  <p class="hero-hint">READ THE STORY · BEAT THE GAME · UNLOCK THE WISH ✨</p>
+  <p class="hero-hint">read_story() · beat_game() · unlock_wish() · repeat()</p>
 </section>
 
 <footer class="footer">
-  <div class="footer-ball" id="fball" onclick="fClick()">⚽</div>
-  <p>MADE WITH ❤️ BY YOUR DHL TEAM · APRIL 6, 2026</p>
-  <p style="margin-top:5px;font-size:.62rem;opacity:.4;">6 CHAPTERS · 6 WISHES · 1 BIRTHDAY LEGEND</p>
+  <div class="footer-ball" id="fball" onclick="fClick()">🐛</div>
+  <p><span>// COMPILED WITH ❤️ BY YOUR DHL TEAM</span> · APRIL 6, 2026</p>
+  <p style="margin-top:5px;font-size:.62rem;opacity:.5;">/* 6 CHAPTERS · 6 WISHES · 1 BIRTHDAY LEGEND */</p>
 </footer>
 
 <script>
@@ -323,91 +335,231 @@ const CHAPTERS={
   }
 };
 
-// ── BG CANVAS — CONFETTI + FIREWORKS + CAKES ─
+// ── BG CANVAS — MATRIX RAIN + CODE BUGS + FRAGMENTS ─
 const C=document.getElementById('canvas'),ctx=C.getContext('2d');
 let W,H;
-function rsz(){W=C.width=innerWidth;H=C.height=innerHeight;}
-addEventListener('resize',rsz);rsz();
 
-// Confetti pieces
-const CONF_COLORS=['#ff4488','#ff8800','#ffdd00','#44ff88','#00d4ff','#cc66ff','#ff6644','#00ffcc'];
-const confetti=[];
-for(let i=0;i<110;i++)confetti.push({
-  x:Math.random()*1800,y:Math.random()*-2000-10,
-  vx:(Math.random()-.5)*1.2,vy:Math.random()*1.8+.8,
-  w:Math.random()*10+4,h:Math.random()*5+2,
-  rot:Math.random()*Math.PI*2,rs:(Math.random()-.5)*.12,
-  color:CONF_COLORS[Math.floor(Math.random()*CONF_COLORS.length)],
-  alpha:Math.random()*.6+.4,shape:Math.random()>.5?'rect':'circle'
-});
+// Matrix characters: katakana + ASCII + code symbols
+const MX_CH='アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>{}[]();:=>/+-|^~!?';
+const CODE_W=['useState','useEffect','<div>','</div>','class ','void ','import ','export ','const ','return ','String','extends','React','async','await','props','null','true','false','int ','public ','static ','@Bean','boolean','new ','render','type ','super','this.'];
 
-// Floating birthday emojis
-const BDAY_ICO=['🎂','🧁','🎈','🎉','🎊','✨','🌟','🍰'];
-const floatEmoji=[];
-for(let i=0;i<14;i++)floatEmoji.push({
-  x:Math.random()*1800,y:Math.random()*-3000-100,
-  vy:-(Math.random()*.3+.15),vx:(Math.random()-.5)*.25,
-  ico:BDAY_ICO[Math.floor(Math.random()*BDAY_ICO.length)],
-  alpha:Math.random()*.35+.12,size:Math.random()*18+14,
-  wobble:Math.random()*Math.PI*2
-});
-
-// Fireworks
-const fwList=[];
-function spawnFW(){
-  const x=Math.random()*W,y=Math.random()*H*.55+50;
-  const hue=Math.random()*360;
-  for(let i=0;i<40;i++){
-    const a=Math.random()*Math.PI*2,s=Math.random()*7+2.5;
-    fwList.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,alpha:1,r:Math.random()*3+1,color:`hsl(${hue},100%,65%)`,decay:.022+Math.random()*.015,trail:[]});
-  }
-  // Sparkle core
-  for(let i=0;i<12;i++){
-    const a=i/12*Math.PI*2,s=Math.random()*3+1;
-    fwList.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,alpha:1,r:Math.random()*2+.5,color:'#fff',decay:.03,trail:[]});
+let mxCols=[];
+function initMx(){
+  mxCols=[];
+  const nc=Math.floor(W/16)+2;
+  for(let i=0;i<nc;i++){
+    mxCols.push({
+      x:i*16+8,
+      y:Math.random()*H*-3,
+      spd:Math.random()*1.5+.4,
+      len:Math.floor(Math.random()*24+10),
+      ch:Array.from({length:38},()=>MX_CH[Math.floor(Math.random()*MX_CH.length)]),
+      wt:Math.floor(Math.random()*220),
+      wd:null
+    });
   }
 }
-setInterval(spawnFW,2200);spawnFW();
 
-function drawBg(){
-  ctx.clearRect(0,0,W,H);
-  // Dark festive bg
-  const bg=ctx.createLinearGradient(0,0,0,H);
-  bg.addColorStop(0,'#020610');bg.addColorStop(.5,'#030812');bg.addColorStop(1,'#050310');
-  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-
-  // Confetti
-  confetti.forEach(c=>{
-    c.x+=c.vx;c.y+=c.vy;c.rot+=c.rs;
-    if(c.y>H+20){c.y=-20;c.x=Math.random()*W;}
-    if(c.x<-20)c.x=W+10;if(c.x>W+20)c.x=-10;
-    ctx.save();ctx.globalAlpha=c.alpha;ctx.translate(c.x,c.y);ctx.rotate(c.rot);ctx.fillStyle=c.color;
-    if(c.shape==='rect'){ctx.fillRect(-c.w/2,-c.h/2,c.w,c.h);}
-    else{ctx.beginPath();ctx.arc(0,0,c.h,0,Math.PI*2);ctx.fill();}
-    ctx.restore();
+// Floating code fragments
+const CF_TXT=[
+  '// Happy Birthday Joandi! 🎂',
+  '<Birthday age={N+1} />',
+  'console.log("🎉 BD!");',
+  '/* 6 April 2026 */',
+  'void celebrate() { 🎂 }',
+  'git push origin birthday',
+  'npm install happiness --save',
+  'System.out.println("🎂");',
+  'return ++joy;',
+  'import { party } from "life";',
+  'try { celebrate(); }',
+  'class Legend extends Human {',
+  '@HappyBirthday("April 6")',
+  'while(alive){ eat_cake(); }',
+  '> ACCESS GRANTED :: JOANDI',
+  'throw new BirthdayParty();',
+  'const age = prev + 1; // 🎈',
+  '// WARNING: Infinite happiness',
+  'joandi.level_up(); // ⭐',
+  'if(alive) { celebrate(); }',
+  'git commit -m "Born legend"',
+  'SELECT * FROM wishes WHERE user="Joandi"'
+];
+const cfParts=[];
+for(let i=0;i<20;i++){
+  cfParts.push({
+    x:Math.random()*(W||1200),
+    y:Math.random()*(H||800),
+    text:CF_TXT[i%CF_TXT.length],
+    a:Math.random()*.13+.03,
+    vy:-(Math.random()*.16+.04),
+    vx:(Math.random()-.5)*.1,
+    col:['#00ff41','#00ff41','#00d4ff','#606060','#f89820'][Math.floor(Math.random()*5)],
+    sz:Math.random()*3+8
   });
+}
 
-  // Floating birthday emojis
-  floatEmoji.forEach(e=>{
-    e.y+=e.vy;e.x+=e.vx;e.wobble+=.02;e.x+=Math.sin(e.wobble)*.3;
-    if(e.y<-60){e.y=H+30;e.x=Math.random()*W;}
-    ctx.save();ctx.globalAlpha=e.alpha;ctx.font=`${e.size}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(e.ico,e.x,e.y);ctx.restore();
+// Software bugs crawling around
+const BUG_ERR=[
+  'NullPointerException!',
+  'Segmentation fault 💥',
+  '404: Cake Not Found',
+  'Infinite loop detected!',
+  'TypeError: undefined',
+  'Stack overflow! 💀',
+  'OutOfMemoryError',
+  'Cannot read props of null',
+  'undefined is not a function',
+  'git: MERGE CONFLICT',
+  'Build FAILED 😬',
+  'npm ERR! 404',
+  'fatal: no repo found',
+  'cannot find symbol',
+  'SIGSEGV received',
+  '403 Forbidden: no cake'
+];
+const bugs=[];
+for(let i=0;i<7;i++){
+  bugs.push({
+    x:Math.random()*(W||1200),
+    y:0,
+    dir:Math.random()>.5?1:-1,
+    spd:Math.random()*.65+.22,
+    lp:Math.random()*Math.PI*2,
+    sz:Math.random()*8+9,
+    col:['#00ff41','#ff4444','#f89820','#44aaff','#cc44ff','#00ffcc','#ff88aa'][i%7],
+    th:null,
+    tt:0
   });
+}
 
-  // Fireworks
-  for(let i=fwList.length-1;i>=0;i--){
-    const f=fwList[i];f.x+=f.vx;f.y+=f.vy;f.vy+=.09;f.vx*=.97;f.alpha-=f.decay;
-    if(f.alpha<=0){fwList.splice(i,1);continue;}
-    ctx.save();ctx.globalAlpha=f.alpha;ctx.shadowColor=f.color;ctx.shadowBlur=8;
-    ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,Math.PI*2);ctx.fillStyle=f.color;ctx.fill();
-    ctx.restore();
+function rsz(){
+  W=C.width=innerWidth;H=C.height=innerHeight;
+  initMx();
+  bugs.forEach(b=>{b.y=H-22-Math.random()*60;});
+}
+addEventListener('resize',rsz);rsz();
+
+function drawBug(b){
+  const{x,y,sz,col,lp,dir}=b;
+  ctx.save();
+  if(dir<0){ctx.translate(2*x,0);ctx.scale(-1,1);}
+  // 3 pairs of legs with wobble
+  ctx.strokeStyle=col;ctx.lineWidth=1.4;ctx.globalAlpha=.8;
+  for(let i=0;i<3;i++){
+    const lx=x-sz*.12+i*sz*.19,wb=Math.sin(lp+i*1.1)*sz*.42;
+    ctx.beginPath();ctx.moveTo(lx,y);ctx.lineTo(lx-sz*.46,y-sz*.3-wb);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(lx,y);ctx.lineTo(lx-sz*.46,y+sz*.3+wb);ctx.stroke();
   }
+  // Oval body with gradient sheen
+  ctx.globalAlpha=.9;
+  const bg2=ctx.createRadialGradient(x-sz*.1,y-sz*.08,0,x,y,sz*.6);
+  bg2.addColorStop(0,'rgba(255,255,255,.22)');bg2.addColorStop(1,col+'bb');
+  ctx.fillStyle=bg2;ctx.beginPath();ctx.ellipse(x,y,sz*.58,sz*.3,0,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle=col;ctx.lineWidth=1;ctx.stroke();
+  // Spots on body
+  ctx.fillStyle='rgba(0,0,0,.3)';
+  for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(x-sz*.14+i*sz*.18,y,sz*.09,0,Math.PI*2);ctx.fill();}
+  // Head
+  ctx.globalAlpha=.92;
+  const hg=ctx.createRadialGradient(x+sz*.58,y-sz*.08,0,x+sz*.66,y,sz*.28);
+  hg.addColorStop(0,'rgba(255,255,255,.2)');hg.addColorStop(1,col+'cc');
+  ctx.fillStyle=hg;ctx.beginPath();ctx.arc(x+sz*.66,y,sz*.25,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle=col;ctx.lineWidth=1;ctx.stroke();
+  // Eyes (glowing)
+  ctx.fillStyle='#000';ctx.globalAlpha=1;
+  ctx.beginPath();ctx.arc(x+sz*.72,y-sz*.09,sz*.07,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(x+sz*.72,y+sz*.09,sz*.07,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.8)';
+  ctx.beginPath();ctx.arc(x+sz*.70,y-sz*.11,sz*.03,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(x+sz*.70,y+sz*.07,sz*.03,0,Math.PI*2);ctx.fill();
+  // Antennae
+  ctx.strokeStyle=col;ctx.lineWidth=1;ctx.globalAlpha=.75;
+  ctx.beginPath();ctx.moveTo(x+sz*.66,y-sz*.2);ctx.quadraticCurveTo(x+sz*1.0,y-sz*.55,x+sz*.9,y-sz*.8);ctx.stroke();
+  ctx.beginPath();ctx.arc(x+sz*.9,y-sz*.8,sz*.06,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+  ctx.beginPath();ctx.moveTo(x+sz*.66,y+sz*.2);ctx.quadraticCurveTo(x+sz*1.0,y+sz*.55,x+sz*.9,y+sz*.8);ctx.stroke();
+  ctx.beginPath();ctx.arc(x+sz*.9,y+sz*.8,sz*.06,0,Math.PI*2);ctx.fill();
+  // Speech bubble error message
+  if(b.th&&b.tt>0){
+    ctx.font=`${Math.round(sz*.72)}px monospace`;
+    const tw=ctx.measureText(b.th).width;
+    const bx=dir>0?x+sz*.95:x-sz*.95-tw-12,by=y-sz*1.65;
+    const fa=Math.min(1,b.tt/15)*.92;
+    ctx.globalAlpha=fa;
+    ctx.fillStyle='rgba(0,8,2,.95)';ctx.strokeStyle=col;ctx.lineWidth=1.2;
+    ctx.beginPath();ctx.roundRect(bx-5,by-13,tw+18,20,4);ctx.fill();ctx.stroke();
+    // Triangle pointer
+    ctx.beginPath();
+    if(dir>0){ctx.moveTo(bx+4,by+7);ctx.lineTo(bx-4,by+14);ctx.lineTo(bx+12,by+7);}
+    else{ctx.moveTo(bx+tw+8,by+7);ctx.lineTo(bx+tw+16,by+14);ctx.lineTo(bx+tw+2,by+7);}
+    ctx.fillStyle='rgba(0,8,2,.95)';ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle=col;ctx.textAlign='left';ctx.textBaseline='middle';ctx.globalAlpha=fa;
+    ctx.fillText(b.th,bx+4,by-3);
+    b.tt--;
+  }
+  ctx.restore();
+}
+
+let bgF=0;
+function drawBg(){
+  bgF++;
+  // Trail fade — dark semi-transparent overlay instead of full clear
+  ctx.fillStyle='rgba(0,4,1,.18)';
+  ctx.fillRect(0,0,W,H);
+
+  // ── Matrix rain columns ──
+  mxCols.forEach(col=>{
+    col.wt--;
+    if(col.wt<=0){col.wd=CODE_W[Math.floor(Math.random()*CODE_W.length)];col.wt=Math.floor(Math.random()*300+120);}
+    col.y+=col.spd;
+    if(col.y>H+col.len*16){col.y=Math.random()*-300;col.spd=Math.random()*1.5+.4;col.len=Math.floor(Math.random()*24+10);}
+    for(let i=0;i<col.len;i++){
+      const cy=col.y-i*16;
+      if(cy<-16||cy>H+16)continue;
+      const fade=1-i/col.len;
+      let ch;
+      if(col.wd&&i<col.wd.length)ch=col.wd[i];
+      else{if(bgF%4===0)col.ch[i]=MX_CH[Math.floor(Math.random()*MX_CH.length)];ch=col.ch[i]||'0';}
+      ctx.font=`${i===0?15:13}px monospace`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      if(i===0){
+        ctx.fillStyle='#ffffff';ctx.shadowColor='#00ff41';ctx.shadowBlur=14;ctx.globalAlpha=.98;
+      } else if(i<5){
+        ctx.fillStyle='#00ff41';ctx.shadowColor='#00ff41';ctx.shadowBlur=5;ctx.globalAlpha=fade*.88;
+      } else {
+        ctx.fillStyle=`rgba(0,${Math.floor(160*fade+15)},${Math.floor(28*fade)},${fade*.6})`;
+        ctx.shadowBlur=0;ctx.globalAlpha=fade*.55;
+      }
+      ctx.fillText(ch,col.x,cy);
+      ctx.shadowBlur=0;ctx.globalAlpha=1;
+    }
+  });
+
+  // ── Floating code fragments ──
+  cfParts.forEach(cf=>{
+    cf.y+=cf.vy;cf.x+=cf.vx;
+    if(cf.y<-20){cf.y=H+10;cf.x=Math.random()*W;cf.text=CF_TXT[Math.floor(Math.random()*CF_TXT.length)];}
+    if(cf.x<-320||cf.x>W+320)cf.x=Math.random()*W;
+    ctx.save();ctx.globalAlpha=cf.a;ctx.font=`${cf.sz}px monospace`;ctx.fillStyle=cf.col;
+    ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(cf.text,cf.x,cf.y);ctx.restore();
+  });
+
+  // ── Crawling bugs ──
+  bugs.forEach(b=>{
+    b.x+=b.spd*b.dir;b.lp+=.11;
+    if(b.x>W+70){b.x=-70;b.y=H-22-Math.random()*65;}
+    if(b.x<-70){b.x=W+70;b.y=H-22-Math.random()*65;}
+    if(Math.random()<.003)b.dir*=-1;
+    if(Math.random()<.0015&&b.tt<=0){b.th=BUG_ERR[Math.floor(Math.random()*BUG_ERR.length)];b.tt=140;}
+    drawBug(b);
+  });
+
   requestAnimationFrame(drawBg);
 }drawBg();
 
-const EMJ=['⭐','🎉','🎊','⚽','🏆','✨','💫','🎈','🎂','💛'];
+const EMJ=['🐛','💻','⚡','🔥','✨','💫','🎂','🎉','⚙️','🖥️','🎊','💾','🐞','⭐','🛠️','🔬'];
 function burst(n=28){const cf=document.getElementById('cf');for(let i=0;i<n;i++){const el=document.createElement('div');el.className='cf';el.textContent=EMJ[Math.floor(Math.random()*EMJ.length)];el.style.left=Math.random()*100+'vw';el.style.animationDuration=(Math.random()*2+2)+'s';el.style.animationDelay=(Math.random()*1.5)+'s';cf.appendChild(el);el.addEventListener('animationend',()=>el.remove());}}
-burst();setInterval(()=>burst(16),9000);
+burst();setInterval(()=>burst(14),11000);
 
 function mkParticles(x,y,color,n,speed=4){const arr=[];for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=Math.random()*speed+1;arr.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,r:Math.random()*4+1.5,alpha:1,color,decay:Math.random()*.04+.02});}return arr;}
 function updateParticles(arr){return arr.filter(p=>p.alpha>.02).map(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.15;p.vx*=.98;p.alpha-=p.decay;return p;});}
